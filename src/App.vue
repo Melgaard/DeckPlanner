@@ -1,10 +1,9 @@
 <template>
-	<img alt="Vue logo" src="./assets/logo.png">
 	<FrontPage />
 </template>
 
 <script>
-import FrontPage from './components/FrontPage.vue'
+import FrontPage from './views/FrontPage.vue'
 
 export default {
   name: 'App',

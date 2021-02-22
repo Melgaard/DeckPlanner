@@ -1,22 +1,26 @@
 <template>
-	<div class="deck" >
-		This is {{name}}
+	<div class="deck" ref="deck">
+		This is {{deck.name}}
 	</div>
 </template>
 
 <script>
+import cardFetcher from '../services/cardFetcher.ts';
 export default {
-  name: 'Deck',
-  props: {
-	name: String,
-	image: String, //TODO
-  },
-  methods: {
-	// clicked() {
-	// 	console.log('clicked ' + name);
-	// 	this.$emit('clicked', name)
-	// }
-  }
+	name: 'Deck',
+	props: {
+		deck: Object,
+	},
+	methods: {
+		// clicked() {
+		// 	console.log('clicked ' + name);
+		// 	this.$emit('clicked', name)
+		// }
+	},
+	async created() {
+		const backgroundImgUrl = await cardFetcher.getCardImageUrl(this.deck.frontCard);
+		this.$refs.deck.style.backgroundImage = `url(${backgroundImgUrl})`;
+	}
 }
 </script>
 
@@ -26,5 +30,6 @@ export default {
 	display: inline-block;
 	width: 375px;
 	height: 275px;
+	margin: 5px;
 }
 </style>
