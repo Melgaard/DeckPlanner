@@ -1,26 +1,34 @@
 <template>
 	<div class="frontpage">
-		<img alt="Bolas" :src="headerImg">
-		<div>
-			<span v-for="deck in decks" v-bind:key="deck.name">
-				<Deck :deck="deck" />
-			</span>
-		</div>
+		<span v-if="view == 'FrontPage'">
+			<img alt="Bolas" :src="headerImg">
+			<div>
+				<span v-for="deck in decks" v-bind:key="deck.name">
+					<Deck :deck="deck" @click="selectDeck(deck)"/>
+				</span>
+			</div>
+		</span>
+		<DeckView v-else-if="view == 'DeckView'" :deck="activeDeck" @closeView="resetView"/>
 	</div>
 </template>
 
 <script>
 import Deck from '../components/Deck.vue';
 import cardFetcher from '../services/cardFetcher.ts';
+import DB from '../services/database.ts';
+import DeckView from '../views/DeckView.vue';
 export default {
 	name: 'FrontPage',
 	components: {
-		Deck
+		Deck,
+		DeckView
 	},
 	data() {
 		return {
-			decks: [{name: 'Rakdos', frontCard: "Immersturm Predator"}, {name: 'Izzet', frontCard: "Goldspan Dragon"}],
+			decks: null,
 			headerImg: null,
+			view: 'FrontPage',
+			activeDeck: null,
 		}
 	},
 	props: {
@@ -28,12 +36,29 @@ export default {
 		image: String,
 	},
 	methods: {
-		clicked() {
-			console.log('clicked ' + name);
-			this.$emit('clicked', name)
+		//View functions
+		resetView() {
+			this.view = 'FrontPage';
+			this.activeDeck = null;
+		},
+		
+		//Database functions
+		loadDB() {
+			this.decks = DB.loadDB();
+		},
+		saveDB() {
+			DB.saveDB(this.decks);
+		},
+
+		//Deck functions
+		selectDeck(deck) {
+			this.activeDeck = deck;
+			this.view = 'DeckView';
 		}
 	},
 	async created() {
+		DB.initDB();
+		this.loadDB();
 		//69656 is best Nicol Bolas
 		this.headerImg = await cardFetcher.getCardImageUrl(69656);
 	}

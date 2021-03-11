@@ -1,6 +1,6 @@
 <template>
 	<div class="deck" ref="deck">
-		This is {{deck.name}}
+		{{deck.name}}
 	</div>
 </template>
 

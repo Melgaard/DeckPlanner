@@ -11,8 +11,6 @@ async function getCardFromArenaId(arenaId) {
 	var res;
 	await axios.get(`https://api.scryfall.com` + `/cards/arena/${arenaId}`)
 		.then(response => {
-			console.log('axios');
-			console.log(response.data);
 			res = response.data;
 		});
 	return res;
@@ -22,8 +20,6 @@ async function getCardFromName(name) {
 	var res;
 	await axios.get(`https://api.scryfall.com` + `/cards/named?exact=${name}`)
 		.then(response => {
-			console.log('axios');
-			console.log(response.data);
 			res = response.data;
 		});
 	return res;
