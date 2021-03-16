@@ -6,6 +6,7 @@
 				<span v-for="deck in decks" v-bind:key="deck.name">
 					<Deck :deck="deck" @click="selectDeck(deck)"/>
 				</span>
+				<DeckCreate @createDeck="createDeck"/>
 			</div>
 		</span>
 		<DeckView v-else-if="view == 'DeckView'" :deck="activeDeck" @closeView="resetView"/>
@@ -14,6 +15,7 @@
 
 <script>
 import Deck from '../components/Deck.vue';
+import DeckCreate from '../components/DeckCreate.vue';
 import cardFetcher from '../services/cardFetcher.ts';
 import DB from '../services/database.ts';
 import DeckView from '../views/DeckView.vue';
@@ -21,6 +23,7 @@ export default {
 	name: 'FrontPage',
 	components: {
 		Deck,
+		DeckCreate,
 		DeckView
 	},
 	data() {
@@ -54,6 +57,16 @@ export default {
 		selectDeck(deck) {
 			this.activeDeck = deck;
 			this.view = 'DeckView';
+		},
+		createDeck(deckString) {
+			//TODO: Fix name and frontcard
+			let newDeck = {
+				name: 'Grixis Conjuring',
+				frontCard: 'Collected Conjuring',
+				decklist: deckString
+			};
+			this.decks = this.decks.concat(newDeck)
+			this.saveDB();
 		}
 	},
 	async created() {

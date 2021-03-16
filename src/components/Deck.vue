@@ -18,8 +18,10 @@ export default {
 		// }
 	},
 	async created() {
-		const backgroundImgUrl = await cardFetcher.getCardImageUrl(this.deck.frontCard);
-		this.$refs.deck.style.backgroundImage = `url(${backgroundImgUrl})`;
+		if (this.deck?.frontCard) {
+			const backgroundImgUrl = await cardFetcher.getCardImageUrl(this.deck.frontCard);
+			this.$refs.deck.style.backgroundImage = `url(${backgroundImgUrl})`;
+		}
 	}
 }
 </script>
