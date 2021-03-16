@@ -3,7 +3,8 @@ module.exports = {
 	objectFromString(deckString) {
 		const deck = {mainDeck: null};
 
-		var deckArray = deckString.replace(/\t/g, '').split('\n');
+		//Remove 'Tabs' and 'Carriage returns' before splitting on 'New line'
+		var deckArray = deckString.replace(/[\t\r]/g, '').split('\n');
 
 		//Set companion
 		//maybe own method
