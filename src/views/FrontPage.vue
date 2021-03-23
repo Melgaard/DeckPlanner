@@ -19,6 +19,7 @@ import DeckCreate from '../components/DeckCreate.vue';
 import cardFetcher from '../services/cardFetcher.ts';
 import DB from '../services/database.ts';
 import DeckView from '../views/DeckView.vue';
+import deckFormatter from '../services/deckFormatter.ts';
 export default {
 	name: 'FrontPage',
 	components: {
@@ -60,12 +61,10 @@ export default {
 		},
 		createDeck(deckString) {
 			//TODO: Fix name and frontcard
-			let newDeck = {
-				name: 'Grixis Conjuring',
-				frontCard: 'Collected Conjuring',
-				decklist: deckString
-			};
-			this.decks = this.decks.concat(newDeck)
+			const newDeck = deckFormatter.objectFromString(deckString);
+			newDeck.name = 'New Deck';
+			newDeck.frontCard = newDeck.mainDeck[Math.floor(Math.random() * newDeck.mainDeck.length)].name;
+			this.decks = this.decks.concat(newDeck);
 			this.saveDB();
 		}
 	},
