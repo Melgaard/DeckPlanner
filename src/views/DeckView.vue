@@ -1,31 +1,21 @@
 <template>
 	<div class="deckView" ref="deckView">
-		<div @click="closeView"> Return </div>
-		{{deck.name}}
-		<div v-if="deck.companion">
-			<div> Companion: </div>
-			<Card :card="deck.companion" />
-		</div>
-		<div> Maindeck: </div>
-		<div v-for="card in deck.mainDeck" v-bind:key="card.name">
-			<Card :card="card" />
-		</div>
-		<div> Sideboard: </div>
-		<div v-for="card in deck.sideBoard" v-bind:key="card.name">
-			<Card :card="card" />
-		</div>
+		<ReturnButton @return="closeView" />
+		<Decklist :deck="deck" />
 	</div>
 </template>
 
 <script>
-import Card from '../components/Card.vue';
+import Decklist from '../components/Decklist.vue';
+import ReturnButton from '../components/ReturnButton.vue';
 export default {
 	name: 'Deck',
 	props: {
 		deck: Object,
 	},
 	components: {
-		Card,
+		Decklist,
+		ReturnButton
 	},
 	data() {
 		return {
