@@ -2,12 +2,16 @@
 	<div class="deckView" ref="deckView">
 		<div @click="closeView"> Return </div>
 		{{deck.name}}
+		<div v-if="deck.companion">
+			<div> Companion: </div>
+			<Card :card="deck.companion" />
+		</div>
 		<div> Maindeck: </div>
-		<div v-for="card in deckObject.mainDeck" v-bind:key="card.name">
+		<div v-for="card in deck.mainDeck" v-bind:key="card.name">
 			<Card :card="card" />
 		</div>
 		<div> Sideboard: </div>
-		<div v-for="card in deckObject.sideBoard" v-bind:key="card.name">
+		<div v-for="card in deck.sideBoard" v-bind:key="card.name">
 			<Card :card="card" />
 		</div>
 	</div>
@@ -15,7 +19,6 @@
 
 <script>
 import Card from '../components/Card.vue';
-import deckFormatter from '../services/deckFormatter.ts';
 export default {
 	name: 'Deck',
 	props: {
@@ -26,7 +29,6 @@ export default {
 	},
 	data() {
 		return {
-			deckObject: null,
 		}
 	},
 	methods: {
@@ -35,7 +37,6 @@ export default {
 		}
 	},
 	async created() {
-		this.deckObject = deckFormatter.objectFromString(this.deck.decklist);
 	}
 }
 </script>

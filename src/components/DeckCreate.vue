@@ -12,7 +12,6 @@ export default {
 	methods: {
 		async createDeck() {
 			const clipBoardText = await navigator.clipboard.readText();
-			console.log('createDeck', clipBoardText);
 			this.$emit('createDeck', clipBoardText);
 		}
 	},
