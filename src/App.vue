@@ -1,16 +1,16 @@
 <template>
-	<FrontPage />
+  <FrontPage />
 </template>
 
 <script>
-import FrontPage from './views/FrontPage.vue'
+import FrontPage from "./views/FrontPage.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    FrontPage
-  }
-}
+    FrontPage,
+  },
+};
 </script>
 
 <style>

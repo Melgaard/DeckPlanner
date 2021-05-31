@@ -1,24 +1,27 @@
-// import { DeckList, Card} from '../types';
-module.exports = {
-	objectFromString(deckString) {
-		const deck = {mainDeck: null};
+import { DeckList, Card} from '../types';
+export default {
+	objectFromString(deckString: string) {
+		const deck: DeckList = {
+			name: 'new deck',
+			mainDeck: null
+		};
 
 		//Remove 'Tabs' and 'Carriage returns' before splitting on 'New line'
-		var deckArray = deckString.replace(/[\t\r]/g, '').split('\n');
+		var deckArray: string[] = deckString.replace(/[\t\r]/g, '').split('\n');
 
 		//Set companion
 		//maybe own method
-		const cLine = deckString.indexOf('Companion');
+		const cLine: number = deckString.indexOf('Companion');
 		if (cLine != -1) {
 			deck.companion = this.lineToCard(deckArray[cLine + 1]);
 		}
 
 		//Set deck
 		//TODO: Refactor to make cleaner, maybe own method
-		const dLine = deckArray.indexOf('Deck');
-		const dLineEnd = deckArray.indexOf('', dLine);
+		const dLine: number = deckArray.indexOf('Deck');
+		const dLineEnd: number = deckArray.indexOf('', dLine);
 		if (dLine != -1) {
-			let deckList = [];
+			let deckList: Array<Card> = [];
 			for (let i = dLine + 1; i < dLineEnd; i++) {
 				deckList = deckList.concat(this.lineToCard(deckArray[i]));
 			}
@@ -30,7 +33,7 @@ module.exports = {
 		const sLine = deckArray.indexOf('Sideboard');
 		const sLineEnd = deckArray.indexOf('', sLine);
 		if (sLine != -1) {
-			let sideboard = [];
+			let sideboard: Array<Card> = [];
 			for (let i = sLine + 1; i < sLineEnd; i++) {
 				sideboard = sideboard.concat(this.lineToCard(deckArray[i]));
 			}
@@ -39,8 +42,8 @@ module.exports = {
 
 		return deck;
 	},
-	lineToCard(line) {
-		const card = {name: null};
+	lineToCard(line: string) {
+		const card: Card = {name: ''};
 
 		card.quantity = Number.parseInt(line.split(' ')[0]);
 
@@ -52,7 +55,7 @@ module.exports = {
 		card.set = setSplit[setSplit.length - 2];
 		
 		const cnSplit = line.split(' ');
-		card.collectorNumber = cnSplit[cnSplit.length - 1];
+		card.collectorNumber = parseInt(cnSplit[cnSplit.length - 1]);
 		
 		return card;
 	}

@@ -1,5 +1,5 @@
 <template>
-	<div class="Button" ref="nButton" @click="Clicked">
+	<div class="Button" ref="nButton" @click="$emit('clicked')">
 		<span v-if="buttonText"> {{buttonText}} </span>
 	</div>
 </template>
@@ -10,11 +10,9 @@ export default {
 	props: {
 		buttonText: String
 	},
-	methods: {
-		Clicked() {
-			this.$emit('clicked');
-		}
-	},
+	emits: [
+		'clicked'
+	],
 }
 </script>
 
@@ -24,8 +22,8 @@ export default {
 	height: 50px;
 	width: 150px;
 	text-align: center;
-    padding: 15px;
-    border: #6f6e6e 1px solid;
+	padding: 15px;
+	border: #6f6e6e 1px solid;
 
 	margin: auto;
 

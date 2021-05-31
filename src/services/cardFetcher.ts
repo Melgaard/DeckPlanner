@@ -1,38 +1,40 @@
+// import { DeckList, Card } from '../types';
+
 const axios = require('axios');
+export default {
+	async  getCard(input: number | string) {
+		if (typeof input == "number")
+			return await this.getCardFromArenaId(input);
+		else if (typeof input == "string")
+			return await this.getCardFromName(input);
+	},
 
-async function getCard(input) {
-	if (typeof input == "number")
-		return await getCardFromArenaId(input);
-	else if (typeof input == "string")
-		return await getCardFromName(input);
-}
+	async getCardFromArenaId(arenaId: number) {
+		var res;
+		await axios.get(`https://api.scryfall.com` + `/cards/arena/${arenaId}`)
+			.then((response: any) => { //TODO: Fix any
+				res = response.data;
+			});
+		return res;
+	},
 
-async function getCardFromArenaId(arenaId) {
-	var res;
-	await axios.get(`https://api.scryfall.com` + `/cards/arena/${arenaId}`)
-		.then(response => {
-			res = response.data;
-		});
-	return res;
-}
+	async getCardFromName(name: string) {
+		var res;
+		await axios.get(`https://api.scryfall.com` + `/cards/named?exact=${name}`)
+			.then((response: any) => { //TODO: Fix any
+				res = response.data;
+			});
+		return res;
+	},
 
-async function getCardFromName(name) {
-	var res;
-	await axios.get(`https://api.scryfall.com` + `/cards/named?exact=${name}`)
-		.then(response => {
-			res = response.data;
-		});
-	return res;
-}
-
-async function getCardImageUrl(arenaId) {
-	const card = await getCard(arenaId);
-	const img = card.image_uris.art_crop
-	return img;
-}
+	async getCardImageUrl(arenaId: number) {
+		const card: any = await this.getCard(arenaId); //TODO: Fix any
+		const img: string = card.image_uris.art_crop
+		return img;
+	},
 
 
-module.exports = {
-	getCard: getCard,
-	getCardImageUrl: getCardImageUrl
+
+	// getCard: getCard,
+	// getCardImageUrl: getCardImageUrl
 }
