@@ -6,16 +6,14 @@
 
 <script>
 import cardFetcher from '../services/cardFetcher.ts';
+// import { DeckList } from '../types.ts';
 export default {
 	name: 'Deck',
 	props: {
-		deck: Object,
+		deck: Object, //as Decklist
 	},
 	methods: {
-		// clicked() {
-		// 	console.log('clicked ' + name);
-		// 	this.$emit('clicked', name)
-		// }
+		
 	},
 	async created() {
 		if (this.deck?.frontCard) {
