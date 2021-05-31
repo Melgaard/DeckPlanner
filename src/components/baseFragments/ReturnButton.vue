@@ -28,7 +28,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .ReturnButton {
-	background: url('../assets/returnIcon.png') no-repeat;
+	background: url('../../assets/returnIcon.png') no-repeat;
 	background-size: 120px;
 	height: 100px;
 	background-position: center;

@@ -122,4 +122,9 @@ module.exports = {
 	saveDB(decks) {
 		localStorage.deckplanner = JSON.stringify(decks);
 	},
+	deleteDeck(deckToDelete) {
+		let currentDecks = this.loadDB();
+		let decks = currentDecks.filter((deck) =>  deck.name != deckToDelete.name);
+		this.saveDB(decks);
+	}
 }

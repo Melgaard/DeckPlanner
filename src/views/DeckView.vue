@@ -1,13 +1,15 @@
 <template>
 	<div class="deckView" ref="deckView">
 		<ReturnButton @return="closeView" />
+		<Button :buttonText="'Delete'" @click="deleteDeck(deck)" />
 		<Decklist :deck="deck" :clickFunction="setFrontCardFunction(deck)"/>
 	</div>
 </template>
 
 <script>
 import Decklist from '../components/Decklist.vue';
-import ReturnButton from '../components/ReturnButton.vue';
+import ReturnButton from '../components/baseFragments/ReturnButton.vue';
+import Button from '../components/baseFragments/Button.vue';
 import DB from '../services/database.ts';
 export default {
 	name: 'Deck',
@@ -16,7 +18,8 @@ export default {
 	},
 	components: {
 		Decklist,
-		ReturnButton
+		ReturnButton,
+		Button
 	},
 	data() {
 		return {
@@ -36,7 +39,10 @@ export default {
 				DB.saveDB(dts);
 			};
 			return retFunc;
-		}
+		},
+		deleteDeck(deck) {
+			DB.deleteDeck(deck);
+		},
 	},
 	async created() {
 	}
