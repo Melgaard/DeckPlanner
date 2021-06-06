@@ -6,7 +6,7 @@
 
 <script lang="ts">
 //TODO: find better way to avoid erros from eslint when importing types
-// eslint-disable-next-line no-unused-vars s
+// eslint-disable-next-line no-unused-vars
 import { Card } from '../types';
 // import { PropType } from 'vue';
 export default {

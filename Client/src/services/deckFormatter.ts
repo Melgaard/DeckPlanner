@@ -1,7 +1,7 @@
-import { DeckList, Card} from '../types';
+import { Decklist, Card} from '../types';
 export default {
 	objectFromString(deckString: string) {
-		const deck: DeckList = {
+		const deck: Decklist = {
 			name: 'new deck',
 			mainDeck: null
 		};
@@ -21,11 +21,11 @@ export default {
 		const dLine: number = deckArray.indexOf('Deck');
 		const dLineEnd: number = deckArray.indexOf('', dLine);
 		if (dLine != -1) {
-			let deckList: Array<Card> = [];
+			let decklist: Array<Card> = [];
 			for (let i = dLine + 1; i < dLineEnd; i++) {
-				deckList = deckList.concat(this.lineToCard(deckArray[i]));
+				decklist = decklist.concat(this.lineToCard(deckArray[i]));
 			}
-			deck.mainDeck = deckList;
+			deck.mainDeck = decklist;
 		}
 
 		//Set sideboard

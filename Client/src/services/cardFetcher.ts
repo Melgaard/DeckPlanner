@@ -1,4 +1,4 @@
-// import { DeckList, Card } from '../types';
+// import { Decklist, Card } from '../types';
 
 const axios = require('axios');
 export default {

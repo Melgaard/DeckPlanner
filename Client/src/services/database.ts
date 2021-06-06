@@ -1,4 +1,4 @@
-import { DeckList } from '../types';
+import { Decklist } from '../types';
 export default {
 	initDB() {
 		if (!localStorage.deckplanner) {
@@ -120,12 +120,12 @@ export default {
 	loadDB() {
 		return JSON.parse(localStorage.deckplanner);
 	},
-	saveDB(decks: Array<DeckList>) {
+	saveDB(decks: Array<Decklist>) {
 		localStorage.deckplanner = JSON.stringify(decks);
 	},
-	deleteDeck(deckToDelete: DeckList) {
+	deleteDeck(deckToDelete: Decklist) {
 		let currentDecks = this.loadDB();
-		let decks = currentDecks.filter((deck: DeckList) =>  deck.name != deckToDelete.name);
+		let decks = currentDecks.filter((deck: Decklist) =>  deck.name != deckToDelete.name);
 		this.saveDB(decks);
 	}
 }
