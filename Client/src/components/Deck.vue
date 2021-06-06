@@ -6,7 +6,7 @@
 
 <script>
 import cardFetcher from '../services/cardFetcher.ts';
-// import { DeckList } from '../types.ts';
+// import { Decklist } from '../types.ts';
 export default {
 	name: 'Deck',
 	props: {
