@@ -13,13 +13,13 @@
 	</div>
 </template>
 
-<script lang="ts">
+<script>
 import Deck from '../components/Deck.vue';
 import DeckCreate from '../components/DeckCreate.vue';
-import cardFetcher from '../services/cardFetcher';
-import Connection from '../services/connection';
+import cardFetcher from '../services/cardFetcher.ts';
+import Connection from '../services/connection.ts';
 import DeckView from '../views/DeckView.vue';
-import deckFormatter from '../services/deckFormatter';
+import deckFormatter from '../services/deckFormatter.ts';
 
 // eslint-disable-next-line no-unused-vars
 import { Decklist, Card } from '../types';
@@ -52,7 +52,7 @@ export default {
 		
 		//Database functions
 		async loadDB() {
-			let y: any = await Connection.loadDB();
+			let y = await Connection.loadDB();
 			this.decks = y.decklistsByUser;
 			console.log('loaded DB', this.decks);
 		},
@@ -67,7 +67,7 @@ export default {
 		},
 		createDeck(deckString) {
 			//TODO: Fix name and frontcard
-			const newDeck: Decklist = deckFormatter.objectFromString(deckString);
+			const newDeck = deckFormatter.objectFromString(deckString);
 			newDeck.name = 'New Deck';
 			newDeck.frontCard = newDeck?.mainDeck[Math.floor(Math.random() * newDeck.mainDeck.length)] || {name: ''} ;
 			this.decks = this.decks.concat(newDeck);

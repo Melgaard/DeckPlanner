@@ -13,7 +13,7 @@ export default {
 	name: 'Cardlist',
 	props: {
 		title: {
-			type: string,
+			type: String,
 			required: false
 		},
 		deck: {
