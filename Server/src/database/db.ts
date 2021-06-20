@@ -15,17 +15,17 @@ db.serialize(function() {
 		mainDeck BLOB,
 		sideBoard BLOB,
 		companion BLOB,
-		frontCard TEXT
+		frontCard BLOB
 	)`
 	db.run(sql);
 	
-	var stmt = db.prepare(`INSERT INTO decklists (name, format, mainDeck )
-			VALUES (?, ?, ?)
+	var stmt = db.prepare(`INSERT INTO decklists (name, format, mainDeck, frontCard )
+			VALUES (?, ?, ?, ?)
 		`);
 	
-	stmt.run("Azorious", "Historic", []);
-	stmt.run("Rakdos", "Standard", []);
-	stmt.run("Izzet", "Standard", []);
+	stmt.run("Azorious", "Historic", [], JSON.stringify({name: "Teferi, Hero of Dominaria"}));
+	stmt.run("Rakdos", "Standard", [], JSON.stringify({name: "Immersturm Predator"}));
+	stmt.run("Izzet", "Standard", [], JSON.stringify({name: "Galazeth Prismari"}));
 	stmt.finalize();
 	
 });
@@ -47,12 +47,22 @@ module.exports = {
 	//Point of improvement: use id dynamically
 	async getAllDecklistsByUser(id) {
 		return new Promise(function(resolve, reject) {
-			db.all(`SELECT * FROM decklists WHERE id = ${id}`, [], function(err, rows) {
+			db.all(`SELECT * FROM decklists`, [], function(err, rows) { //TODO: use id to get specific user
 				if (err) reject(err)
 				resolve(rows);
 			})
 		})
 	},
+
+	async getDecklist(id) {
+		return new Promise(function(resolve, reject) {
+			db.get(`SELECT * FROM decklists WHERE id = ${id}`, [], function(err, rows) {
+				if (err) reject(err)
+				resolve(rows);
+			})
+		})
+	},
+
 	//Point of improvement: Should catch entering duplicate date (can suggest update instead)
 	addDecklist(name, format, mainDeck, sideBoard, companion, frontCard) { 
 		return new Promise(function(resolve, reject) {

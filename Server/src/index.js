@@ -17,7 +17,7 @@ const db = require('./database/db.ts');
 
 const PrintInitializedDB = async () => { 
 	const decklists = await db.getAllDecklists(); 
-	console.log("Initalized db has these decklists: ", decklists);
+	//console.log("Initalized db has these decklists: ", decklists);
 }
 PrintInitializedDB()
 

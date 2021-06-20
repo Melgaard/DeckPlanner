@@ -7,10 +7,20 @@ class DecklistAPI extends RESTDataSource {
 	}
 
 	async getByID( { id } ) {
-		console.log("TODO: finish getAllByUser with non-mocked data");
-		const x = await db.getAllDecklistsByID(id);
+		const x = await db.getDecklist(id);
+
+		x.frontCard = JSON.parse(x.frontCard)
 		console.log("end of getAllByUser", x);
 
+		return x;
+	}
+
+	async getAllDecklistsByUser( { id } ) {
+		let x = await db.getAllDecklistsByUser();
+		x.forEach(element => {
+			element.frontCard = JSON.parse(element.frontCard)
+		});
+		console.log('hola', x)
 		return x;
 	}
 

@@ -10,7 +10,7 @@
 import Decklist from '../components/Decklist.vue';
 import ReturnButton from '../components/baseFragments/ReturnButton.vue';
 import Button from '../components/baseFragments/Button.vue';
-import DB from '../services/database.ts';
+import Connection from '../services/connection.ts';
 export default {
 	name: 'Deck',
 	props: {
@@ -34,14 +34,14 @@ export default {
 				deck.frontCard = card.name;
 
 				//TODO: refactor save when update deck method is made in DB
-				const dts = DB.loadDB();
+				const dts = Connection.loadDB();
 				dts.forEach((d, index) => {if (d.name == deck.name) dts[index]=deck;});
-				DB.saveDB(dts);
+				Connection.saveDB(dts);
 			};
 			return retFunc;
 		},
 		deleteDeck(deck) {
-			DB.deleteDeck(deck);
+			Connection.deleteDeck(deck);
 		},
 	},
 	async created() {

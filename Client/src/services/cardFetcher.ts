@@ -1,8 +1,9 @@
-// import { Decklist, Card } from '../types';
+
+import { Card } from '../types';
 
 const axios = require('axios');
 export default {
-	async  getCard(input: number | string) {
+	async getCard(input: number | string) {
 		if (typeof input == "number")
 			return await this.getCardFromArenaId(input);
 		else if (typeof input == "string")
@@ -27,9 +28,13 @@ export default {
 		return res;
 	},
 
-	async getCardImageUrl(arenaId: number) {
-		const card: any = await this.getCard(arenaId); //TODO: Fix any
-		const img: string = card.image_uris.art_crop
+	async getCardImageUrl(card: Card) {
+
+		// if (card.image_uris?.art_crop) return card.image_uris.art_crop;
+		
+		const externalCard: any = await this.getCard(card.name); //TODO: Fix any
+		const img: string = externalCard?.image_uris.art_crop
+		
 		return img;
 	},
 

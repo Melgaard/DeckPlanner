@@ -47,7 +47,7 @@ const typeDefs = gql`
 
 	type Query {
 		decklistByID(id: ID!): Decklist!
-		decklists: [Decklist]!
+		decklistsByUser(id: ID): [Decklist]!
 		me: User
 	}
 

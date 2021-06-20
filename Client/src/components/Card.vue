@@ -25,10 +25,7 @@ export default {
 		}
 	},
 	methods: {
-		deleteme() {
-			var x: Card ={name: ''};
-			console.log(x);
-		}
+
 	},
 	async created() {
 	}

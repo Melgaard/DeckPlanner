@@ -1,5 +1,5 @@
 export type Decklist = {
-	name: String
+	name: string
 	mainDeck: Array<Card> | null,
 	sideBoard?: Array<Card> | null,
 	companion?: Card | null,
@@ -7,8 +7,8 @@ export type Decklist = {
 
 }
 export type Card = {
-	name: String,
+	name: string,
 	quantity?: Number,
-	set?: String,
+	set?: string,
 	collectorNumber?: Number,
 }

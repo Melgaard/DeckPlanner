@@ -2,7 +2,10 @@
 module.exports = {
 	Query: {
 		decklistByID: async (_, { id }, { dataSources }) => {
-			return await dataSources.entryAPI.getByID({ id });
+			return await dataSources.decklistAPI.getByID({ id });
+		},
+		decklistsByUser: async (_, { id }, { dataSources }) => {
+			return await dataSources.decklistAPI.getAllDecklistsByUser({ id });
 		},
 		me: (_, __, { dataSources }) => 
 			dataSources.userAPI.getUser()

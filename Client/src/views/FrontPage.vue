@@ -13,13 +13,17 @@
 	</div>
 </template>
 
-<script>
+<script lang="ts">
 import Deck from '../components/Deck.vue';
 import DeckCreate from '../components/DeckCreate.vue';
-import cardFetcher from '../services/cardFetcher.ts';
-import DB from '../services/database.ts';
+import cardFetcher from '../services/cardFetcher';
+import Connection from '../services/connection';
 import DeckView from '../views/DeckView.vue';
-import deckFormatter from '../services/deckFormatter.ts';
+import deckFormatter from '../services/deckFormatter';
+
+// eslint-disable-next-line no-unused-vars
+import { Decklist, Card } from '../types';
+
 export default {
 	name: 'FrontPage',
 	components: {
@@ -47,11 +51,13 @@ export default {
 		},
 		
 		//Database functions
-		loadDB() {
-			this.decks = DB.loadDB();
+		async loadDB() {
+			let y: any = await Connection.loadDB();
+			this.decks = y.decklistsByUser;
+			console.log('loaded DB', this.decks);
 		},
 		saveDB() {
-			DB.saveDB(this.decks);
+			Connection.saveDB(this.decks);
 		},
 
 		//Deck functions
@@ -61,18 +67,18 @@ export default {
 		},
 		createDeck(deckString) {
 			//TODO: Fix name and frontcard
-			const newDeck = deckFormatter.objectFromString(deckString);
+			const newDeck: Decklist = deckFormatter.objectFromString(deckString);
 			newDeck.name = 'New Deck';
-			newDeck.frontCard = newDeck.mainDeck[Math.floor(Math.random() * newDeck.mainDeck.length)].name;
+			newDeck.frontCard = newDeck?.mainDeck[Math.floor(Math.random() * newDeck.mainDeck.length)] || {name: ''} ;
 			this.decks = this.decks.concat(newDeck);
 			this.saveDB();
 		}
 	},
 	async created() {
-		DB.initDB();
+		Connection.initDB();
 		this.loadDB();
 		//69656 is best Nicol Bolas
-		this.headerImg = await cardFetcher.getCardImageUrl(69656);
+		this.headerImg = await cardFetcher.getCardImageUrl({name: 'Nicol Bolas, Dragon god'});
 	}
 }
 </script>
