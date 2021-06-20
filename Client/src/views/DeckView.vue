@@ -30,13 +30,12 @@ export default {
 			this.$emit('closeView');
 		},
 		setFrontCardFunction(deck) {
-			const retFunc = function(card) {
+			const retFunc = async function(card) {
 				deck.frontCard = card.name;
 
 				//TODO: refactor save when update deck method is made in DB
-				const dts = Connection.loadDB();
-				dts.forEach((d, index) => {if (d.name == deck.name) dts[index]=deck;});
-				Connection.saveDB(dts);
+				deck.frontCard = card;
+				// Connection.updateDeck(deck);
 			};
 			return retFunc;
 		},

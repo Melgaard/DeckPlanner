@@ -52,8 +52,7 @@ export default {
 		
 		//Database functions
 		async loadDB() {
-			let y = await Connection.loadDB();
-			this.decks = y.decklistsByUser;
+			this.decks = (await Connection.loadDB()).decklistsByUser;
 			console.log('loaded DB', this.decks);
 		},
 		saveDB() {

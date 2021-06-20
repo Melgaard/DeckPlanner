@@ -22,6 +22,24 @@ export default {
 					frontCard {
 						name
 					}
+					mainDeck {
+						name
+						quantity
+						set
+						collectorNumber
+					}
+					sideBoard {
+						name
+						quantity
+						set
+						collectorNumber
+					}
+					companion {
+						name
+						quantity
+						set
+						collectorNumber
+					}
 				}
 			}
 		`;

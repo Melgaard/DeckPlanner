@@ -18,18 +18,9 @@ db.serialize(function() {
 		frontCard BLOB
 	)`
 	db.run(sql);
-	
-	var stmt = db.prepare(`INSERT INTO decklists (name, format, mainDeck, frontCard )
-			VALUES (?, ?, ?, ?)
-		`);
-	
-	stmt.run("Azorious", "Historic", [], JSON.stringify({name: "Teferi, Hero of Dominaria"}));
-	stmt.run("Rakdos", "Standard", [], JSON.stringify({name: "Immersturm Predator"}));
-	stmt.run("Izzet", "Standard", [], JSON.stringify({name: "Galazeth Prismari"}));
-	stmt.finalize();
+	addDefaultDecks();
 	
 });
-
 
 module.exports = {
 	
@@ -75,3 +66,47 @@ module.exports = {
 		})
 	}
 };
+
+
+
+function addDefaultDecks() {
+	var stmt = db.prepare(`INSERT INTO decklists (name, format, mainDeck, frontCard, sideBoard, companion )
+			VALUES (?, ?, ?, ?, ?, ?)
+		`);
+	
+	stmt.run("Azorious", "Historic", JSON.stringify([
+		{name: "Absorb", quantity: 2, set: "RNA", collectorNumber: "151"},
+		{name: "Baffling End", quantity: 4, set: "RIX", collectorNumber: "1"},
+		{name: "Cast Out", quantity: 4, set: "AKR", collectorNumber: "9"},
+		{name: "Castle Ardenvale", quantity: 3, set: "ELD", collectorNumber: "238"},
+		{name: "Castle Vantress", quantity: 2, set: "ELD", collectorNumber: "242"},
+		{name: "Censor", quantity: 4, set: "AKR", collectorNumber: "52"},
+		{name: "Dovin's Veto", quantity: 1, set: "WAR", collectorNumber: "193"},
+		{name: "Glacial Fortress", quantity: 4, set: "XLN", collectorNumber: "255"},
+		{name: "Grafdigger's Cage", quantity: 1, set: "M20", collectorNumber: "227"},
+		{name: "Hallowed Fountain", quantity: 4, set: "RNA", collectorNumber: "251"},
+		{name: "Irrigated Farmland", quantity: 4, set: "AKR", collectorNumber: "304"},
+		{name: "Narset, Parter of Veils", quantity: 2, set: "WAR", collectorNumber: "61"},
+		{name: "Saw It Coming", quantity: 3, set: "KHM", collectorNumber: "76"},
+		{name: "Search for Azcanta", quantity: 1, set: "XLN", collectorNumber: "74"},
+		{name: "Shark Typhoon", quantity: 4, set: "IKO", collectorNumber: "67"},
+		{name: "Teferi, Hero of Dominaria", quantity: 4, set: "DAR", collectorNumber: "207"},
+		{name: "Wrath of God", quantity: 4, set: "AKR", collectorNumber: "46"},
+		{name: "Plains", quantity: 3, set: "THB", collectorNumber: "250"},
+		{name: "Island", quantity: 4, set: "THB", collectorNumber: "251"},
+		{name: "Field of Ruin", quantity: 2, set: "XLN", collectorNumber: "254"}
+	]), 
+	JSON.stringify({name: "Teferi, Hero of Dominaria"}), 
+	JSON.stringify([
+		{name: "Authority of the Consuls", quantity: 2, set: "KLR", collectorNumber: "9"},
+		{name: "Saw It Coming", quantity: 1, set: "KHM", collectorNumber: "76"},
+		{name: "Doomskar", quantity: 2, set: "KHM", collectorNumber: "9"},
+		{name: "Dovin's Veto", quantity: 3, set: "WAR", collectorNumber: "193"},
+		{name: "Grafdigger's Cage", quantity: 1, set: "M20", collectorNumber: "227"},
+		{name: "Narset, Parter of Veils", quantity: 2, set: "WAR", collectorNumber: "61"},
+		{name: "Rest in Peace", quantity: 2, set: "AKR", collectorNumber: "33"},
+		{name: "Tale's End", quantity: 2, set: "M20", collectorNumber: "77"}]), null);
+	stmt.run("Rakdos", "Standard", JSON.stringify([]), JSON.stringify({name: "Immersturm Predator"}), JSON.stringify([]), JSON.stringify({name: "Lurrus of the Dream-Den", quantity: 1, set: "IKO", collectorNumber: "226"}));
+	stmt.run("Izzet", "Standard", JSON.stringify([]), JSON.stringify({name: "Galazeth Prismari"}), JSON.stringify([]), null);
+	stmt.finalize();
+}

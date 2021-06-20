@@ -7,18 +7,18 @@ class DecklistAPI extends RESTDataSource {
 	}
 
 	async getByID( { id } ) {
-		const x = await db.getDecklist(id);
+		let x = await db.getDecklist(id);
 
-		x.frontCard = JSON.parse(x.frontCard)
+		x = parseDeck(x);
 		console.log("end of getAllByUser", x);
 
 		return x;
 	}
 
 	async getAllDecklistsByUser( { id } ) {
-		let x = await db.getAllDecklistsByUser();
+		let x = await db.getAllDecklistsByUser(id);
 		x.forEach(element => {
-			element.frontCard = JSON.parse(element.frontCard)
+			element = parseDeck(element);
 		});
 		console.log('hola', x)
 		return x;
@@ -37,6 +37,19 @@ class DecklistAPI extends RESTDataSource {
 		console.log("TODO: finish delete decklist ");
 		return [];
 	}
+}
+
+//Helper functions
+//TODO: Is parseDeck needed when save function is implemented or is it still important to parse/stringify
+function parseDeck(dtp) {
+	let parsedDeck = dtp;
+
+	if (dtp.mainDeck) parsedDeck.mainDeck = JSON.parse(dtp.mainDeck);
+	if (dtp.sideBoard) parsedDeck.sideBoard = JSON.parse(dtp.sideBoard);
+	if (dtp.companion) parsedDeck.companion = JSON.parse(dtp.companion);
+	if (dtp.frontCard) parsedDeck.frontCard = JSON.parse(dtp.frontCard);
+
+	return parsedDeck;
 }
 
 module.exports = DecklistAPI;
