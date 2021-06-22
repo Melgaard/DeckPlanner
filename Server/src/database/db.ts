@@ -55,14 +55,18 @@ module.exports = {
 	},
 
 	//Point of improvement: Should catch entering duplicate date (can suggest update instead)
-	addDecklist(name, format, mainDeck, sideBoard, companion, frontCard) { 
+	async addDecklist(name, format, mainDeck, sideBoard, companion, frontCard) { 
 		return new Promise(function(resolve, reject) {
-			var stmt = db.prepare(`INSERT INTO decklists (name, format, mainDeck, sideBoard, companion, frontCard)
-				VALUES (?, ?, ?)
-			`);
-			stmt.run(name, format, mainDeck, sideBoard, companion, frontCard);
-			stmt.finalize();
-			resolve();
+			//TODO: Figure out if stmt as VALUES (?) or as ${?}
+			const stmt = `
+				INSERT INTO decklists (name, format, mainDeck, sideBoard, companion, frontCard)
+				VALUES (?, ?, ?, ?, ?, ?)
+			`
+
+			db.run(stmt, [name, format, mainDeck, sideBoard, companion, frontCard], function(err) {
+				if (err) reject(err)
+				resolve(this.lastID);
+			});
 		})
 	}
 };

@@ -52,8 +52,8 @@ const typeDefs = gql`
 	}
 
 	type Mutation {
-		createDecklist(name: String!, mainDeck: [CardInput], sideBoard: [CardInput], companion: CardInput, frontCard: CardInput): UpdateResponse!
-		updateDecklist(id: ID!, name: String!, mainDeck: [CardInput], sideBoard: [CardInput], companion: CardInput, frontCard: CardInput): UpdateResponse!
+		createDecklist(name: String!, format: Format, mainDeck: [CardInput], sideBoard: [CardInput], companion: CardInput, frontCard: CardInput): UpdateResponse!
+		updateDecklist(id: ID!, name: String, format: Format, mainDeck: [CardInput], sideBoard: [CardInput], companion: CardInput, frontCard: CardInput): UpdateResponse!
 		deleteDecklist(id: ID!): UpdateResponse!
 	}
 

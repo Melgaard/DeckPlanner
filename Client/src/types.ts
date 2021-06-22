@@ -1,5 +1,6 @@
 export type Decklist = {
 	name: string
+	format: Format
 	mainDeck: Array<Card> | null,
 	sideBoard?: Array<Card> | null,
 	companion?: Card | null,
@@ -11,4 +12,13 @@ export type Card = {
 	quantity?: Number,
 	set?: string,
 	collectorNumber?: Number,
+}
+//TODO: enum string as caps or capitalized
+export enum Format {
+	STANDARD = "STANDARD",
+	HISTORIC = "HISTORIC",
+	PIONEER = "PIONEER",
+	MODERN = "MODERN",
+	VINTAGE = "VINTAGE",
+	LEGACY = "LEGACY"
 }

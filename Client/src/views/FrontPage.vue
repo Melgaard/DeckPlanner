@@ -6,7 +6,7 @@
 				<span v-for="deck in decks" v-bind:key="deck.name">
 					<Deck :deck="deck" @click="selectDeck(deck)"/>
 				</span>
-				<DeckCreate @createDeck="createDeck"/>
+				<DeckImporter @createDeck="createDeck"/>
 			</div>
 		</span>
 		<DeckView v-else-if="view == 'DeckView'" :deck="activeDeck" @closeView="resetView"/>
@@ -15,7 +15,7 @@
 
 <script>
 import Deck from '../components/Deck.vue';
-import DeckCreate from '../components/DeckCreate.vue';
+import DeckImporter from '../components/DeckImporter.vue';
 import cardFetcher from '../services/cardFetcher.ts';
 import Connection from '../services/connection.ts';
 import DeckView from '../views/DeckView.vue';
@@ -28,7 +28,7 @@ export default {
 	name: 'FrontPage',
 	components: {
 		Deck,
-		DeckCreate,
+		DeckImporter,
 		DeckView
 	},
 	data() {

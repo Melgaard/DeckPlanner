@@ -43,13 +43,6 @@ export default {
 				}
 			}
 		`;
-		//Readd to query and fix
-		// mainDeck {
-		// 	name
-		// 	quantity
-		// 	set
-		// 	collectorNumber
-		// }
 		
 		const result = await gqlclient
 			.query(QUERY, { id: 'INSERT USER ID HERE' })
@@ -62,6 +55,32 @@ export default {
 	},
 	saveDB(decks: Array<Decklist>) {
 		localStorage.deckplanner = JSON.stringify(decks);
+	},
+	async createDeck(deckToCreate: Decklist) {
+		let retVal: Decklist[] = [];
+
+		console.log('debugger')
+
+		//TODO: Create decklist input type in schema
+		const MUTATION = `mutation createDeck {
+			createDecklist(name: ${deckToCreate.name}, format: ${deckToCreate.format}, mainDeck: ${deckToCreate.mainDeck}, sideBoard: ${deckToCreate.sideBoard}, companion: ${deckToCreate.companion}, frontCard: ${deckToCreate.frontCard}) {
+				decklists: {
+					name
+					format
+					mainDeck {name}
+					sideBoard {name}
+					companion {name}
+					frontCard {name}
+				}
+			}
+		}`;
+
+		const result = await gqlclient
+			.query(MUTATION, { id: 'INSERT USER ID HERE' })
+			.toPromise()
+
+		retVal = result.data;
+		return retVal;
 	},
 	async deleteDeck(deckToDelete: Decklist) {
 		let currentDecks = await this.loadDB();

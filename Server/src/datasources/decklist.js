@@ -6,26 +6,27 @@ class DecklistAPI extends RESTDataSource {
 		super();
 	}
 
+	//TODO: replace retVal variable name
 	async getByID( { id } ) {
-		let x = await db.getDecklist(id);
-
-		x = parseDeck(x);
-		console.log("end of getAllByUser", x);
-
-		return x;
+		let retVal = await db.getDecklist(id);
+		retVal = parseDeck(retVal);
+		return retVal;
 	}
 
+	//TODO: replace retVal variable name
 	async getAllDecklistsByUser( { id } ) {
-		let x = await db.getAllDecklistsByUser(id);
-		x.forEach(element => {
-			element = parseDeck(element);
+		let retVal = await db.getAllDecklistsByUser(id);
+		retVal.forEach(deck => {
+			deck = parseDeck(deck);
 		});
-		console.log('hola', x)
-		return x;
+		return retVal;
 	}
 
-	async create(name, mainDeck, sideBoard, companion, frontCard) {
-		return await db.addDecklist(name, mainDeck, sideBoard, companion, frontCard); 
+	async create(name, format, mainDeck, sideBoard, companion, frontCard) {
+		//TODO: STRINGIFY TOGETHER, OR BETTER HAVE DECKLIST INPUT TYPE
+		const createdID = await db.addDecklist(name, format, JSON.stringify(mainDeck), JSON.stringify(sideBoard), JSON.stringify(companion), JSON.stringify(frontCard)); 
+		//TOOD: Create better return type to not wrap Decklist as [Decklist]
+		return [await this.getByID({id: createdID})];
 	}
 
 	update() {
