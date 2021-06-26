@@ -22,3 +22,18 @@ export enum Format {
 	VINTAGE = "VINTAGE",
 	LEGACY = "LEGACY"
 }
+
+//Custom typeguards
+export function isDecklist(obj: Decklist): obj is Decklist {
+	const isDecklist =
+		(obj as Decklist)?.name !== undefined &&
+		(obj as Decklist)?.format !== undefined &&
+		(obj as Decklist)?.mainDeck !== undefined;
+
+	return isDecklist;
+}
+
+export function isCard(obj: Card): obj is Card {
+	const isCard = (obj as Card)?.name !== undefined;
+	return isCard;
+}

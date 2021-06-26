@@ -1,6 +1,6 @@
 import { Decklist, Card, Format} from '../types';
 export default {
-	objectFromString(deckString: string): Decklist {
+	decklistFromString(deckString: string): Decklist{
 		const deck: Decklist = {
 			name: 'new deck',
 			format: Format.STANDARD, //TODO: DECK CURRENTLY DEFAULT TO STANDARD HERE!

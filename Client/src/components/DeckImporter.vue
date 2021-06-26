@@ -4,9 +4,9 @@
 	</div>
 </template>
 
-<script>
-import deckFormatter from '../services/deckFormatter.ts';
-import connection from '../services/connection.ts';
+<script lang="ts">
+import deckFormatter from '../services/deckFormatter';
+import connection from '../services/connection';
 
 export default {
 	name: 'DeckImporter',
@@ -20,7 +20,14 @@ export default {
 		async importDeck() {
 			const clipBoardText = await navigator.clipboard.readText();
 			//TODO: Fix name and frontcard
-			const newDeck = deckFormatter.objectFromString(clipBoardText);
+			const newDeck = deckFormatter.decklistFromString(clipBoardText);
+
+			if (!newDeck.mainDeck) {
+				//TODO: implement better user error than alert
+				alert("Your clipboard seems to contain an invalid decklist");
+				return;
+			}
+
 			newDeck.name = 'New Deck';
 			newDeck.frontCard = newDeck?.mainDeck[Math.floor(Math.random() * newDeck.mainDeck.length)] || {name: ''} ;
 			
