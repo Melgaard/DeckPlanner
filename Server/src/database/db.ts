@@ -5,7 +5,7 @@ var db = new sqlite3.Database("database.db");
 
 db.serialize(function() {
 
-	db.run("DROP TABLE decklists");
+	db.run("DROP TABLE IF EXISTS decklists");
 
 	const sql = `CREATE TABLE IF NOT EXISTS decklists(
 		id INTEGER PRIMARY KEY,
