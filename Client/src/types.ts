@@ -15,10 +15,10 @@ export type Card = {
 }
 
 export enum Format {
-	STANDARD = "Standard",
-	HISTORIC = "Historic",
-	PIONEER = "Pioneer",
-	MODERN = "Modern",
-	VINTAGE = "Vintage",
-	LEGACY = "Legacy"
+	STANDARD = "STANDARD",
+	HISTORIC = "HISTORIC",
+	PIONEER = "PIONEER",
+	MODERN = "MODERN",
+	VINTAGE = "VINTAGE",
+	LEGACY = "LEGACY"
 }

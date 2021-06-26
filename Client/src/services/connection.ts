@@ -1,4 +1,4 @@
-import { Decklist } from '../types';
+import { Decklist, Format } from '../types';
 const axios = require('axios');
 const baseUrl = 'http://localhost:4000';
 import { createClient } from '@urql/core';
@@ -59,12 +59,17 @@ export default {
 	async createDeck(deckToCreate: Decklist) {
 		let retVal: Decklist[] = [];
 
-		console.log('debugger')
-
-		//TODO: Create decklist input type in schema
-		const MUTATION = `mutation createDeck {
-			createDecklist(name: ${deckToCreate.name}, format: ${deckToCreate.format}, mainDeck: ${deckToCreate.mainDeck}, sideBoard: ${deckToCreate.sideBoard}, companion: ${deckToCreate.companion}, frontCard: ${deckToCreate.frontCard}) {
-				decklists: {
+		const MUTATION = `
+		mutation createDeck($name: String!, $format: Format, $mainDeck: [CardInput], $sideBoard: [CardInput], $companion: CardInput, $frontCard: CardInput){
+			createDecklist(
+				name: $name,
+				format: $format,
+				mainDeck: $mainDeck,
+				sideBoard: $sideBoard,
+				companion: $companion,
+				frontCard: $frontCard
+			) { 
+				decklists {
 					name
 					format
 					mainDeck {name}
@@ -73,10 +78,19 @@ export default {
 					frontCard {name}
 				}
 			}
-		}`;
+			
+		  }
+		`
 
 		const result = await gqlclient
-			.query(MUTATION, { id: 'INSERT USER ID HERE' })
+			.query(MUTATION, { 
+				id: 'INSERT USER ID HERE', 
+				name: deckToCreate.name,
+				format: deckToCreate.format,
+				mainDeck: deckToCreate.mainDeck,
+				sideBoard: deckToCreate.sideBoard,
+				companion: deckToCreate.companion,
+				frontCard: deckToCreate.frontCard })
 			.toPromise()
 
 		retVal = result.data;
