@@ -15,7 +15,7 @@ export default {
 	methods: {
 		
 	},
-	async created() {
+	async mounted() {
 		if (this.deck?.frontCard) {
 			const backgroundImgUrl = await cardFetcher.getCardImageUrl(this.deck.frontCard);
 			this.$refs.deck.style.backgroundImage = `url(${backgroundImgUrl})`;

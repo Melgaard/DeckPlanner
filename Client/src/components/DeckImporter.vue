@@ -24,8 +24,8 @@ export default {
 			newDeck.name = 'New Deck';
 			newDeck.frontCard = newDeck?.mainDeck[Math.floor(Math.random() * newDeck.mainDeck.length)] || {name: ''} ;
 			
-			connection.createDeck(newDeck);
-			this.$emit('deckImported', newDeck);
+			const createdDeck = connection.createDeck(newDeck);
+			this.$emit('deckCreated', createdDeck);
 		}
 	},
 	async created() {

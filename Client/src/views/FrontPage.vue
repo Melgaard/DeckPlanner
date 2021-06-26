@@ -1,12 +1,12 @@
 <template>
 	<div class="frontpage">
 		<span v-if="view == 'FrontPage'">
-			<img alt="Bolas" :src="headerImg">
+			<!-- <img alt="Bolas" :src="headerImg"> -->
 			<div>
-				<span v-for="deck in decks" v-bind:key="deck.name">
+				<span v-for="deck in decks" v-bind:key="deck.id">
 					<Deck :deck="deck" @click="selectDeck(deck)"/>
 				</span>
-				<DeckImporter @createDeck="createDeck"/>
+				<DeckImporter @deckCreated="deckCreated"/>
 			</div>
 		</span>
 		<DeckView v-else-if="view == 'DeckView'" :deck="activeDeck" @closeView="resetView"/>
@@ -19,7 +19,6 @@ import DeckImporter from '../components/DeckImporter.vue';
 import cardFetcher from '../services/cardFetcher.ts';
 import Connection from '../services/connection.ts';
 import DeckView from '../views/DeckView.vue';
-import deckFormatter from '../services/deckFormatter.ts';
 
 // eslint-disable-next-line no-unused-vars
 import { Decklist, Card } from '../types';
@@ -64,13 +63,8 @@ export default {
 			this.activeDeck = deck;
 			this.view = 'DeckView';
 		},
-		createDeck(deckString) {
-			//TODO: Fix name and frontcard
-			const newDeck = deckFormatter.objectFromString(deckString);
-			newDeck.name = 'New Deck';
-			newDeck.frontCard = newDeck?.mainDeck[Math.floor(Math.random() * newDeck.mainDeck.length)] || {name: ''} ;
-			this.decks = this.decks.concat(newDeck);
-			this.saveDB();
+		deckCreated(createdDeck) {
+			this.decks = this.decks.concat(createdDeck);
 		}
 	},
 	async created() {
