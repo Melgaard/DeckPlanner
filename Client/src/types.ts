@@ -13,12 +13,12 @@ export type Card = {
 	set?: string,
 	collectorNumber?: Number,
 }
-//TODO: enum string as caps or capitalized
+
 export enum Format {
-	STANDARD = "STANDARD",
-	HISTORIC = "HISTORIC",
-	PIONEER = "PIONEER",
-	MODERN = "MODERN",
-	VINTAGE = "VINTAGE",
-	LEGACY = "LEGACY"
+	STANDARD = "Standard",
+	HISTORIC = "Historic",
+	PIONEER = "Pioneer",
+	MODERN = "Modern",
+	VINTAGE = "Vintage",
+	LEGACY = "Legacy"
 }
