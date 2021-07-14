@@ -9,17 +9,11 @@ const UserAPI = require('./datasources/user');
 
 const db = require('./database/db.ts');
 
-
-// const addEntryToDB = async () => { 
-// 	await db.addEntry("24-11-2020", "Marcus Jensen", 82); 
-// }
-// addEntryToDB()
-
 const PrintInitializedDB = async () => { 
 	const decklists = await db.getAllDecklists(); 
-	//console.log("Initalized db has these decklists: ", decklists);
+	console.log("Initalized db has these decklists: ", decklists);
 }
-PrintInitializedDB()
+//PrintInitializedDB()
 
 const server = new ApolloServer({
 	typeDefs,
