@@ -34,6 +34,12 @@ export default {
 						set
 						collectorNumber
 					}
+					commander {
+						name
+						quantity
+						set
+						collectorNumber
+					}
 					companion {
 						name
 						quantity
@@ -60,12 +66,13 @@ export default {
 		let retVal: Decklist[] = [];
 
 		const MUTATION = `
-		mutation createDeck($name: String!, $format: Format, $mainDeck: [CardInput], $sideBoard: [CardInput], $companion: CardInput, $frontCard: CardInput){
+		mutation createDeck($name: String!, $format: Format, $mainDeck: [CardInput], $sideBoard: [CardInput], $commander: CardInput, $companion: CardInput, $frontCard: CardInput){
 			createDecklist(
 				name: $name,
 				format: $format,
 				mainDeck: $mainDeck,
 				sideBoard: $sideBoard,
+				commander: $commander,
 				companion: $companion,
 				frontCard: $frontCard
 			) { 
@@ -74,6 +81,7 @@ export default {
 					format
 					mainDeck {name}
 					sideBoard {name}
+					commander {name}
 					companion {name}
 					frontCard {name}
 				}
@@ -89,6 +97,7 @@ export default {
 				format: deckToCreate.format,
 				mainDeck: deckToCreate.mainDeck,
 				sideBoard: deckToCreate.sideBoard,
+				commander: deckToCreate.commander,
 				companion: deckToCreate.companion,
 				frontCard: deckToCreate.frontCard })
 			.toPromise()

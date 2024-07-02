@@ -20,7 +20,7 @@ export default {
 <style scoped>
 .Button {
 	height: 50px;
-	width: 150px;
+	width: 100px;
 	text-align: center;
 	padding: 15px;
 	border: #6f6e6e 1px solid;

@@ -10,11 +10,18 @@ export default {
 		//Remove 'Tabs' and 'Carriage returns' before splitting on 'New line'
 		var deckArray: string[] = deckString.replace(/[\t\r]/g, '').split('\n');
 
+		//Set commander
+		//maybe own method
+		const commanderLine: number = deckString.indexOf('Commander');
+		if (commanderLine != -1) {
+			deck.commander = this.lineToCard(deckArray[commanderLine + 1]);
+		}
+
 		//Set companion
 		//maybe own method
-		const cLine: number = deckString.indexOf('Companion');
-		if (cLine != -1) {
-			deck.companion = this.lineToCard(deckArray[cLine + 1]);
+		const companionLine: number = deckString.indexOf('Companion');
+		if (companionLine != -1) {
+			deck.companion = this.lineToCard(deckArray[companionLine + 1]);
 		}
 
 		//Set deck

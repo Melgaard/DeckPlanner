@@ -11,9 +11,9 @@ module.exports = {
 			dataSources.userAPI.getUser()
 	},
 	Mutation: {
-		createDecklist: async (_, { name, format, mainDeck, sideBoard, companion, frontCard }, { dataSources }) => {
+		createDecklist: async (_, { name, format, mainDeck, sideBoard, commander, companion, frontCard }, { dataSources }) => {
 			
-			const decklists = await dataSources.decklistAPI.create(name, format, mainDeck, sideBoard, companion, frontCard);
+			const decklists = await dataSources.decklistAPI.create(name, format, mainDeck, sideBoard, commander, companion, frontCard);
 
 			return {
 				success: true,
@@ -21,7 +21,7 @@ module.exports = {
 				decklists,
 			};
 		},
-		updateDecklist: async (_, { id, name, mainDeck, sideBoard, companion, frontCard }, { dataSources }) => {
+		updateDecklist: async (_, { id, name, mainDeck, sideBoard, commander, companion, frontCard }, { dataSources }) => {
 			
 			// await dataSources.entryAPI.update(date, id);
 			// const entries = await dataSources.entryAPI.getAllByUser({id});

@@ -6,7 +6,6 @@
 				<span v-for="deck in decks" v-bind:key="deck.id">
 					<Deck :deck="deck" @click="selectDeck(deck)"/>
 				</span>
-				/** //TODO: Align DeckImporter with deck squares */
 				<DeckImporter @deckCreated="deckCreated"/>
 			</div>
 		</span>

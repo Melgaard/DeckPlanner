@@ -30,15 +30,16 @@ export default {
 
 	async getCardImageUrl(card: Card) {
 
-		// if (card.image_uris?.art_crop) return card.image_uris.art_crop;
-		
 		const externalCard: any = await this.getCard(card.name); //TODO: Fix any
-		const img: string = externalCard?.image_uris.art_crop
+
+		//TODO: Allow getting of backside image
+		let img: string = ''
+		if (externalCard.card_faces != null) {
+			img = externalCard.card_faces[0].image_uris.art_crop
+		} else {
+			img = externalCard?.image_uris.art_crop
+		}
 		
 		return img;
 	},
-
-
-	// getCard: getCard,
-	// getCardImageUrl: getCardImageUrl
 }

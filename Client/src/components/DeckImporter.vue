@@ -1,6 +1,6 @@
 <template>
 	<div class="deckImporter" ref="deckImporter" @click="importDeck">
-		Create new from clipboard
+		<span class="createText">Create new from clipboard</span>
 	</div>
 </template>
 
@@ -8,6 +8,8 @@
 import deckFormatter from '../services/deckFormatter';
 import connection from '../services/connection';
 import { defineComponent } from 'vue'
+
+//TODO: Make deckimporter work instantly without needing a page reload
 
 export default defineComponent({
 	name: 'DeckImporter',
@@ -49,6 +51,9 @@ export default defineComponent({
 	width: 375px;
 	height: 275px;
 	margin: 5px;
+	vertical-align: bottom;
+
+	align-content: center;
 
 	border: #e88e16 1px;
 	border-style: solid;

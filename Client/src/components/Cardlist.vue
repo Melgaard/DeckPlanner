@@ -2,7 +2,7 @@
 	<div class="cardlist" ref="cardlist">
 		<div v-if="title"> {{title}} </div>
 		<div v-for="card in deck" v-bind:key="card.name">
-			<Card :card="card" @click="clickFunction ? clickFunction(card) : null" />
+			<Card :card="card" @click="clickFunction ? clickFunction(card) : null" style="cursor: pointer" />
 		</div>
 	</div>
 </template>

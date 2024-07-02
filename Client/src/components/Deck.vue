@@ -35,8 +35,12 @@ export default {
 	},
 	async mounted() {
 		if (this.deck?.frontCard) {
+			//TODO: Turn this into helper function, as its reused elsewhere
 			const backgroundImgUrl = await cardFetcher.getCardImageUrl(this.deck.frontCard);
 			this.$refs.deck.style.backgroundImage = `url(${backgroundImgUrl})`;
+			this.$refs.deck.style.backgroundSize = 'cover';
+			this.$refs.deck.style.backgroundRepeat = 'no-repeat';
+			this.$refs.deck.style.backgroundPosition = 'center center';
 		}
 
 		this.deck_colors = await deckColors.getColorsFromDeck(this.deck);

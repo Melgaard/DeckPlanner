@@ -22,9 +22,9 @@ class DecklistAPI extends RESTDataSource {
 		return retVal;
 	}
 
-	async create(name, format, mainDeck, sideBoard, companion, frontCard) {
+	async create(name, format, mainDeck, sideBoard, commander, companion, frontCard) {
 		//TODO: STRINGIFY TOGETHER, OR BETTER HAVE DECKLIST INPUT TYPE
-		const createdID = await db.addDecklist(name, format, JSON.stringify(mainDeck), JSON.stringify(sideBoard), JSON.stringify(companion), JSON.stringify(frontCard)); 
+		const createdID = await db.addDecklist(name, format, JSON.stringify(mainDeck), JSON.stringify(sideBoard), JSON.stringify(commander), JSON.stringify(companion), JSON.stringify(frontCard)); 
 		//TOOD: Create better return type to not wrap Decklist as [Decklist]
 		return [await this.getByID({id: createdID})];
 	}
@@ -47,6 +47,7 @@ function parseDeck(dtp) {
 
 	if (dtp.mainDeck) parsedDeck.mainDeck = JSON.parse(dtp.mainDeck);
 	if (dtp.sideBoard) parsedDeck.sideBoard = JSON.parse(dtp.sideBoard);
+	if (dtp.commander) parsedDeck.commander = JSON.parse(dtp.commander);
 	if (dtp.companion) parsedDeck.companion = JSON.parse(dtp.companion);
 	if (dtp.frontCard) parsedDeck.frontCard = JSON.parse(dtp.frontCard);
 

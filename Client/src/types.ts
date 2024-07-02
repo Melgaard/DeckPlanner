@@ -3,6 +3,7 @@ export type Decklist = {
 	format: Format
 	mainDeck: Array<Card> | null,
 	sideBoard?: Array<Card> | null,
+	commander?: Card | null,
 	companion?: Card | null,
 	frontCard?: Card | null,
 }
