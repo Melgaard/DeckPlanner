@@ -12,6 +12,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "graphql": "^15.5.0",
+    "mana-font": "^1.10.0",
     "vue": "^3.0.0",
     "vue-class-component": "^8.0.0-0"
   },

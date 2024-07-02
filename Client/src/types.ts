@@ -4,8 +4,7 @@ export type Decklist = {
 	mainDeck: Array<Card> | null,
 	sideBoard?: Array<Card> | null,
 	companion?: Card | null,
-	frontCard?: Card | null, //TODO: Should this be Card
-
+	frontCard?: Card | null,
 }
 export type Card = {
 	name: string,
