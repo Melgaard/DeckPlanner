@@ -16,6 +16,7 @@
 
 <script>
 //TODO: Change all components to Vue Composition instead of old options syntax
+//TODO: Install Tailwind
 import Deck from '../components/Deck.vue';
 import DeckImporter from '../components/DeckImporter.vue';
 import cardFetcher from '../services/cardFetcher.ts';
