@@ -44,6 +44,7 @@ export default {
 		return deck;
 	},
 	lineToCard(line: string) {
+		//TODO: Only accepts arena format 'quantity name (set) setnumber'. Make it accept without '(set) setnumber'.
 		const card: Card = {name: ''};
 
 		card.quantity = Number.parseInt(line.split(' ')[0]);

@@ -6,6 +6,7 @@
 				<span v-for="deck in decks" v-bind:key="deck.id">
 					<Deck :deck="deck" @click="selectDeck(deck)"/>
 				</span>
+				/** //TODO: Align DeckImporter with deck squares */
 				<DeckImporter @deckCreated="deckCreated"/>
 			</div>
 		</span>
@@ -14,6 +15,7 @@
 </template>
 
 <script>
+//TODO: Change all components to Vue Composition instead of old options syntax
 import Deck from '../components/Deck.vue';
 import DeckImporter from '../components/DeckImporter.vue';
 import cardFetcher from '../services/cardFetcher.ts';
