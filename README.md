@@ -1,24 +1,23 @@
 # deckplanner
 
-## Project setup
+## What to do
 ```
 npm install
+
+npm run start 		#Runs the backend when in Server folder
+npm run serve		#Runs the frontend when in Client folder
+
+localhost:8080		#To see the result
+localhost:4000		#To play with graphql playground
 ```
 
-### Compiles and hot-reloads for development
+### Notes
 ```
-npm run serve
-```
+Everything should be hot reloadable
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
+npm run build		# Compiles and minifies for production
+npm run lint		# Lints and fixes files
+https://cli.vuejs.org/config/
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```
