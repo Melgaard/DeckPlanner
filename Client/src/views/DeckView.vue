@@ -43,9 +43,8 @@ export default {
 		renameDeck(deck) {
 			const deckName = prompt('Enter the new name', '')
 
-			//TODO: refactor save when update deck method is made in DB
 			deck.name = deckName;
-			// Connection.updateDeck(deck);
+			Connection.updateDeck(deck);
 		},
 		deleteDeck(deck) {
 			Connection.deleteDeck(deck);
