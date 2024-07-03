@@ -30,6 +30,8 @@ export default {
 
 	async getCardImageUrl(card: Card) {
 
+		//TODO: Fix adventure cards
+
 		const externalCard: any = await this.getCard(card.name); //TODO: Fix any
 
 		//TODO: Allow getting of backside image

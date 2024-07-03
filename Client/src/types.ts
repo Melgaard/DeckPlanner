@@ -1,4 +1,5 @@
 export type Decklist = {
+	id: number
 	name: string
 	format: Format
 	mainDeck: Array<Card> | null,

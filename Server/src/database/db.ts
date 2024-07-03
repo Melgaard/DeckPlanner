@@ -31,7 +31,6 @@ module.exports = {
 		return new Promise(function(resolve, reject) {
 			db.all("SELECT * FROM decklists", [], function(err, rows) {
 				if (err) reject(err)
-				console.log(rows)
 				resolve(rows);
 			})
 		})
@@ -42,7 +41,6 @@ module.exports = {
 		return new Promise(function(resolve, reject) {
 			db.all(`SELECT * FROM decklists`, [], function(err, rows) { //TODO: use id to get specific user
 				if (err) reject(err)
-				console.log(rows);
 				resolve(rows);
 			})
 		})
@@ -67,6 +65,21 @@ module.exports = {
 			`
 
 			db.run(stmt, [name, format, mainDeck, sideBoard, commander, companion, frontCard], function(err) {
+				if (err) reject(err)
+				resolve(this.lastID);
+			});
+		})
+	},
+
+	async updateDecklist(id, name, frontCard) {
+		return new Promise(function(resolve, reject) {
+			const stmt = `
+				UPDATE decklists 
+				SET name = ?, frontCard = ?
+				WHERE id = ?
+			`
+
+			db.run(stmt, [name, JSON.stringify(frontCard), id], function(err) {
 				if (err) reject(err)
 				resolve(this.lastID);
 			});

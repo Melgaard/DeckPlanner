@@ -29,9 +29,13 @@ class DecklistAPI extends RESTDataSource {
 		return [await this.getByID({id: createdID})];
 	}
 
-	update() {
-		console.log("TODO: finish update decklist ");
-		return [];
+	async updateDecklist(id, name, format, mainDeck, sideBoard, commander, companion, frontCard) {
+		//TODO: finish update decklist to include left out properties
+
+		const updatedID = await db.updateDecklist(id, name, frontCard)
+		let retVal = await this.getByID({id: updatedID})
+
+		return [retVal];
 	}
 
 	delete() {

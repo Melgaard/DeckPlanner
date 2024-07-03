@@ -35,11 +35,8 @@ export default {
 		},
 		setFrontCardFunction(deck) {
 			const retFunc = async function(card) {
-				deck.frontCard = card.name;
-
-				//TODO: refactor save when update deck method is made in DB
 				deck.frontCard = card;
-				// Connection.updateDeck(deck);
+				Connection.updateDeck(deck);
 			};
 			return retFunc;
 		},

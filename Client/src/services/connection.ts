@@ -17,6 +17,7 @@ export default {
 		const QUERY = `
 			query DecklistsByUser($id: ID!) {
 				decklistsByUser(id: $id) {
+					id
 					name
 					format
 					frontCard {
@@ -104,6 +105,56 @@ export default {
 
 		retVal = result.data;
 		return retVal;
+	},
+	async updateDeck(deckToUpdate: Decklist) {
+		delete (deckToUpdate?.frontCard as any).__typename //TODO: Fix this hack to remove __typename
+
+		const MUTATION = `
+		mutation updateDeck($id: ID!, $name: String!, $frontCard: CardInput){
+			updateDecklist(
+				id: $id,
+				name: $name,
+				
+				frontCard: $frontCard
+			) { 
+				decklists {
+					name
+					
+					frontCard {name}
+				}
+			}
+			
+		  }
+		`
+
+		//TODO: Readd once solution found via frontcard. Solution has been found :) Now it 'just' needs to be coded
+		//, $format: Format, $mainDeck: [CardInput], $sideBoard: [CardInput], $commander: CardInput, $companion: CardInput
+
+		// format: $format,
+		// 		mainDeck: $mainDeck,
+		// 		sideBoard: $sideBoard,
+		// 		commander: $commander,
+		// 		companion: $companion,
+
+		// format
+		// 			mainDeck {name}
+		// 			sideBoard {name}
+		// 			commander {name}
+		// 			companion {name}
+
+		const result = await gqlclient
+			.mutation(MUTATION, { 
+				id: deckToUpdate.id, 
+				name: deckToUpdate.name,
+				// format: deckToUpdate.format,
+				// mainDeck: deckToUpdate.mainDeck,
+				// sideBoard: deckToUpdate.sideBoard,
+				// commander: deckToUpdate.commander,
+				// companion: deckToUpdate.companion,
+				frontCard: deckToUpdate.frontCard })
+			.toPromise()
+
+		let retVal = result.data;
 	},
 	async deleteDeck(deckToDelete: Decklist) {
 		let currentDecks = await this.loadDB();

@@ -2,6 +2,7 @@ import { Decklist, Card, Format} from '../types';
 export default {
 	decklistFromString(deckString: string): Decklist{
 		const deck: Decklist = {
+			id: -1, //TODO: Figure out what to do with id before exists in db
 			name: 'new deck',
 			format: Format.STANDARD, //TODO: DECK CURRENTLY DEFAULT TO STANDARD HERE!
 			mainDeck: null

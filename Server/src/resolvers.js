@@ -21,14 +21,14 @@ module.exports = {
 				decklists,
 			};
 		},
-		updateDecklist: async (_, { id, name, mainDeck, sideBoard, commander, companion, frontCard }, { dataSources }) => {
+		updateDecklist: async (_, { id, name, format, mainDeck, sideBoard, commander, companion, frontCard }, { dataSources }) => {
 			
-			// await dataSources.entryAPI.update(date, id);
-			// const entries = await dataSources.entryAPI.getAllByUser({id});
+			dataSources.decklistAPI.updateDecklist(id, name, format, mainDeck, sideBoard, commander, companion, frontCard);
+			const decklists = await dataSources.decklistAPI.getAllDecklistsByUser({id});
 
 			return {
 				success: true,
-				message: 'Decklist created',
+				message: 'Decklist updated',
 				decklists,
 			};
 		},
