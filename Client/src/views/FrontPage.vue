@@ -67,6 +67,7 @@ export default {
 		},
 		deckCreated(createdDeck) {
 			this.decks = this.decks.concat(createdDeck);
+			this.resetView()
 		}
 	},
 	async created() {
