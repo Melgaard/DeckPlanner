@@ -78,6 +78,7 @@ export default {
 				frontCard: $frontCard
 			) { 
 				decklists {
+					id
 					name
 					format
 					mainDeck {name}
@@ -93,7 +94,7 @@ export default {
 
 		const result = await gqlclient
 			.query(MUTATION, { 
-				id: 'INSERT USER ID HERE', 
+				id: deckToCreate.id, 
 				name: deckToCreate.name,
 				format: deckToCreate.format,
 				mainDeck: deckToCreate.mainDeck,
@@ -103,7 +104,8 @@ export default {
 				frontCard: deckToCreate.frontCard })
 			.toPromise()
 
-		retVal = result.data;
+		retVal = result.data.createDecklist.decklists[0];
+
 		return retVal;
 	},
 	async updateDeck(deckToUpdate: Decklist) {

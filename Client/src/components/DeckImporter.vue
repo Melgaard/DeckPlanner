@@ -35,7 +35,7 @@ export default defineComponent({
 				newDeck.name = 'New Deck';
 				newDeck.frontCard = newDeck?.mainDeck[Math.floor(Math.random() * newDeck.mainDeck.length)] || {name: ''} ;
 
-				const createdDeck = connection.createDeck(newDeck);
+				const createdDeck = await connection.createDeck(newDeck);
 				emit('deckCreated', createdDeck);
 			}
 		}
